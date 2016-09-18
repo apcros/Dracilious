@@ -1,0 +1,32 @@
+% layout 'default';
+<div class="row">
+	<div class="col s12 m6">
+	  <div class="card">
+	    <div class="card-content">
+	      <span class="card-title"><%= $xml->{sysDesc} %> summary</span>
+	      <p>
+	      	<ul class="collection">
+	      		% if ($xml->{pwState} eq '1') {
+				   <li class="collection-item green"><b>Main engine on !</b></li>
+				% } else {
+					<li class="collection-item orange"><b>Power off</b></li>
+				% }
+				% if ($xml->{status} eq 'ok') {
+				   <li class="collection-item green"><b>Server is healthy</b></li>
+				% } else {
+					<li class="collection-item orange"><b>Issue ongoing !</b></li>
+				% }
+		    </ul>
+	      	 <ul class="collection">
+	      	  <li class="collection-item"><b>OS :</b><%= $xml->{osName} %></li>
+	      	  <li class="collection-item"><b>Hostname :</b><%= $xml->{hostName} %></li>
+		      <li class="collection-item"><b>System revision :</b><%= $xml->{sysRev} %></li>
+		      <li class="collection-item"><b>Bios revision :</b><%= $xml->{biosVer} %></li>
+		      <li class="collection-item"><b>Firmware revision :</b><%= $xml->{fwVersion} %></li>
+		      <li class="collection-item"><b>LCC Firmware revision :</b><%= $xml->{LCCfwVersion} %></li>
+		    </ul>
+	      </p>
+	    </div>
+	  </div>
+	</div>
+<div>
