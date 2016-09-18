@@ -1,5 +1,5 @@
 # Dracilious
-The Mojo app consumming DracPerl::Client to provide a faster and cleaner front-end for Dell server monitoring
+The Mojo app consumming [DracPerl::Client](https://github.com/apcros/Drac-Perl) to provide a faster and cleaner front-end for Dell server monitoring
 
 ## How to use ? 
 
