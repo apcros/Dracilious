@@ -6,7 +6,11 @@ sub startup {
 
   my $r = $self->routes;
   # Normal route to controller
-  $r->get('/')->to('Api#summary');
+  $r->get('/')->to('Api#home');
+  $r->post('/auth')->to('Api#authenticate');
+  $r->post('/loaddata')->to('Api#loaddata');
+  $r->get('/loginform')->to('Api#loginform');
+
 }
 
 1;

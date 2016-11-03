@@ -1,0 +1,21 @@
+% layout 'default';
+
+<div id="data">
+<h3>Loading data..</h3>
+<div class="progress">
+      <div class="indeterminate"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		loadData("summary");
+	});
+
+	function loadData(data_type) {
+			$.post("/loaddata", { type: data_type})
+			  .done(function( data ) {
+			    	$("#data").html(data);
+			  });
+	}
+</script>

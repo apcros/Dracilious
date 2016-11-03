@@ -1,1 +1,5 @@
-requires 'DracPerl::Client';
+requires 'Carp';
+requires 'File::Slurp';
+requires 'JSON';
+requires 'DracPerl::Client' => 0.10;
+requires 'Mojolicious';
