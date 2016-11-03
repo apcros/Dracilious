@@ -72,9 +72,49 @@ sub loaddata {
 
     my $xml
         = $self->drac->get(
-        "pwState,sysDesc,sysRev,hostName,osName,osVersion,svcTag,expSvcCode,biosVer,fwVersion,LCCfwVersion"
+        "pwState,sysDesc,sysRev,hostName,osName,osVersion,svcTag,expSvcCode,biosVer,fwVersion,LCCfwVersion,v4IPAddr,temperatures,fans,systemLevel,lcdText"
         );
-    $self->render( xml => $xml, template => 'api/summary' );
+    $self->render(
+        xml      => $xml,
+        sensors  => $self->_clean_sensors($xml),
+        template => 'api/summary'
+    );
+}
+
+#TODO move that to Drac-Perl
+sub _clean_sensors {
+    my ( $self, $xml ) = @_;
+
+    my $sensors = $xml->{sensortype};
+    my $cleaned_sensors;
+    my $sensor_names = {
+        '1' => 'temperature',
+        '3' => 'power',
+        '4' => 'fans'
+    };
+    foreach my $sensor ( @{$sensors} ) {
+        my $sensor_name = $sensor_names->{ $sensor->{sensorid} };
+        next unless $sensor_name;
+        if ( $sensor->{thresholdSensorList}->{sensor}->{reading} ) {
+            $cleaned_sensors->{$sensor_name}
+                = $sensor->{thresholdSensorList}->{sensor}->{reading} . " "
+                . $sensor->{thresholdSensorList}->{sensor}->{units};
+        }
+        else {
+            foreach my $single_sensor (
+                keys %{ $sensor->{thresholdSensorList}->{sensor} } )
+            {
+                my $single_sensor_data = $sensor->{thresholdSensorList}->{sensor}
+                    ->{$single_sensor};
+                $cleaned_sensors->{$sensor_name}->{$single_sensor}
+                    = $single_sensor_data->{reading} . " "
+                    . $single_sensor_data->{units};
+            }
+        }
+
+    }
+
+    return $cleaned_sensors;
 }
 
 sub summary {

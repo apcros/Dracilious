@@ -3,20 +3,34 @@ The Mojo app consumming [DracPerl::Client](https://github.com/apcros/Drac-Perl) 
 
 ## How to use ? 
 
-Currently you need to symlink the lib from Drac-Perl in my Github. (I need to dzil that module so that you can install it via Pinto, or better putting it on cpan.)
-You also need to go put your crendentials in the modules.
+First install the deps :
 
-Dracilious is still very much WIP.
+        cpanm -l local --installdeps .
+
+Then set your iDRAC configuration in a .cfg in the root folder. (See .cfg.example)
+
+Then run the app !
+
+        perl -Mlocal::lib=local script/dracilious daemon
+
+Dracilious is still very much WIP (As well as Drac-Perl).
 
 ## TODO
 
-- Login token caching
-- Configuration files
-- More sensors
+- Better session caching/ Session lock
+- Database
+- EVEN M0A4 sensors
 - Graph.js
 - Password protection
+- Better error handling
+- Dynamic refresh
+- Docker Container
 
 ## Screenshots
+
+### v0.2 (Session caching and more sensors)
+
+[![v0.2](http://i.imgur.com/CujrMG2.png)](http://i.imgur.com/CujrMG2.png)
 
 ### v0.1 (First release) 
 
