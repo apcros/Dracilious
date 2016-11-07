@@ -41,7 +41,7 @@ Dracilious is still very much WIP (As well as Drac-Perl).
 - Password protection
 - Better error handling
 - Dynamic refresh
-- Docker Container
+- Docker Image with baked-in dependencies
 
 ## Screenshots
 
