@@ -3,6 +3,8 @@ The Mojo app consumming [DracPerl::Client](https://github.com/apcros/Drac-Perl) 
 
 ## How to use ? 
 
+### Normal way :
+
 First install the deps :
 
         cpanm -l local --installdeps .
@@ -12,6 +14,21 @@ Then set your iDRAC configuration in a .cfg in the root folder. (See .cfg.exampl
 Then run the app !
 
         perl -Mlocal::lib=local script/dracilious daemon
+
+### Skinny Jeans way (Docker) :
+
+First make sure to go create a .cfg in dracilious/ (See .cfg.example)
+Then build the image :
+
+	docker build -t name_it_how_youwant .
+
+It might take a while as it needs to install all the deps. (I will make a public base image with the deps baked in when I'll be less likely to add more :p)
+When it's done, run it !
+
+	docker run -it -p 3000:3000 name_it_how_youwant
+
+Dracilious should now be running on the port 3000 ! See the Docker doc for additional parameters.
+
 
 Dracilious is still very much WIP (As well as Drac-Perl).
 
